@@ -3,7 +3,8 @@ version: '3'
 services:
   wordpress:
     image: bitnami/wordpress:6.4.3 # <-- bajarlo de bitnami para agregarle mas variables de conf al wordpress. 
-    environment:                   # inicialmente para pruebas con la ip estaba definido el puerto 80:8080, tras hacer uso del http-portal para que no de conflicto con el puerto 80 se elimina.
+    
+    environment: 
       - WORDPRESS_DATABASE_HOST=mysql
       - WORDPRESS_DATABASE_NAME=${WORDPRESS_DATABASE_NAME}
       - WORDPRESS_DATABASE_USER=${WORDPRESS_DATABASE_USER}
