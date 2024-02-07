@@ -2,18 +2,18 @@ version: '3'
 
 services:
   wordpress:
-    image: bitnami/wordpress # <-- bajarlo de bitnami para agregarle mas variables de conf al wordpress. 
-    ports: 
-      - 80:8080 # <-- se consulta en dockerhub como funciona con bitnami
+    image: bitnami/wordpress
+    ports:
+      - 80:8080
       - 443:8443
-    environment: 
+    environment:
       - WORDPRESS_DATABASE_HOST=mysql
       - WORDPRESS_DATABASE_NAME=${WORDPRESS_DB_NAME}
       - WORDPRESS_DATABASE_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DATABASE_PORT_NUMBER=${WORDPRESS_DB_PORT_NUMBER}
       - WORDPRESS_DATABASE_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - WORDPRESS_DATABASE_PORT_NUMBER=${WORDPRESS_DB_PORT_NUMBER}
       - ALLOW_EMPTY_PASSWORD=yes
-    volumes: 
+    volumes:
       - wordpress_data:/var/www/html
     depends_on:
       - mysql
@@ -36,10 +36,10 @@ services:
     image: phpmyadmin
     ports:
       - 8080:80
-    environment: 
+    environment:
       - PMA_ARBITRARY=1
     restart: always
 
-volumes: 
+volumes:
   mysql_data:
   wordpress_data:
