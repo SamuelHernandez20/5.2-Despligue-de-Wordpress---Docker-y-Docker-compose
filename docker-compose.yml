@@ -2,22 +2,26 @@ version: '3'
 
 services:
   wordpress:
-    image: bitnami/wordpress
-    ports:
-      - 80:8080
-      - 443:8443
-    environment:
+    image: bitnami/wordpress:6.4.3 # <-- bajarlo de bitnami para agregarle mas variables de conf al wordpress. 
+    
+    environment: 
       - WORDPRESS_DATABASE_HOST=mysql
-      - WORDPRESS_DATABASE_NAME=${WORDPRESS_DB_NAME}
-      - WORDPRESS_DATABASE_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DATABASE_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - WORDPRESS_DATABASE_PORT_NUMBER=${WORDPRESS_DB_PORT_NUMBER}
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - wordpress_data:/var/www/html
+      - WORDPRESS_DATABASE_NAME=${WORDPRESS_DATABASE_NAME}
+      - WORDPRESS_DATABASE_USER=${WORDPRESS_DATABASE_USER}
+      - WORDPRESS_DATABASE_PASSWORD=${WORDPRESS_DATABASE_PASSWORD}
+      - WORDPRESS_BLOG_NAME=${WORDPRESS_BLOG_NAME}
+      - WORDPRESS_USERNAME=${WORDPRESS_USERNAME}
+      - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
+      - WORDPRESS_EMAIL=${WORDPRESS_EMAIL}
+
+    volumes: 
+      - wordpress_data:/bitnami/wordpress
     depends_on:
       - mysql
     restart: always
+    networks:
+      - frontend-net
+      - backend-net
 
   mysql:
     image: mysql:8.0
@@ -25,21 +29,44 @@ services:
       - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
-      - MYSQL_USER=${WORDPRESS_DB_USER}
-      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - MYSQL_DATABASE=${WORDPRESS_DATABASE_NAME}
+      - MYSQL_USER=${WORDPRESS_DATABASE_USER}
+      - MYSQL_PASSWORD=${WORDPRESS_DATABASE_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
     restart: always
+    networks:
+      - backend-net
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin:5.2
     ports:
       - 8080:80
-    environment:
-      - PMA_ARBITRARY=1
+    environment: 
+      - PMA_HOST=mysql
     restart: always
+    networks:
+      - frontend-net
+      - backend-net
 
-volumes:
+  https-portal:
+    image: steveltn/https-portal:1 # <-- al ser no verificada se le coloca el namespace.
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    environment:
+      DOMAINS: '${DOMINIO} -> http://wordpress:8080' # <-- para una mejor práctica guardar en una variable el dominio.
+      STAGE: 'production' # Don't use production until staging works
+      # FORCE_RENEW: 'true'
+    networks:
+      - frontend-net
+
+volumes: 
   mysql_data:
   wordpress_data:
+
+networks:
+ frontend-net:
+ backend-net:
+
