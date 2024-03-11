@@ -9,3 +9,5 @@ En esta primera práctica de ejemplo se busca desplegar mediante un archivo **.y
     │   ├── docker-compose.yml
 
 ```
+## 1. Archivo de variables:
+
