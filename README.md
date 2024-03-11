@@ -87,8 +87,13 @@ services:
     networks:
       - backend-net
 ```
-`En este tercer bloque el servicio que defino es el del mysql:`
+`En este tercer bloque el servicio que defino es el del phpmyadmin:`
 
+1. Procedo a descargar la imagen de **phpmyadmin**, en este caso una imagen de nombre **phpmyadmin:5.2**.
+2. Definición de puertos [máquina]:[contenedor_mysql] **8080**; **80**.
+3. La parte de las variables defino el **PMA_HOST**, que era indicar el nombre del contenedor con el que quiero conectarme desde phpmyadmin, sin tener que indicarlo manualmente desde la interfaz gráfica.
+4. Reinicio.
+5. Definición de red personalizada, en este caso como **frontend-net** y **backend-net**.
  ```
  phpmyadmin:
     image: phpmyadmin:5.2
