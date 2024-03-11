@@ -32,4 +32,6 @@ En la primera línea nos encontramos con el establecimiento de la **versión**, 
 ```
 version: '3'
 ```
+`En este primer bloque el servicio que se define es el de mysql:`
+
 
