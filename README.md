@@ -32,6 +32,35 @@ En la primera línea nos encontramos con el establecimiento de la **versión**, 
 ```
 version: '3'
 ```
-`En este primer bloque el servicio que se define es el de mysql:`
+`En este primer bloque el servicio que se defino es el del wordpress:`
 
+1. Procedo a descargar la imagen de prestashop, en este caso una imagen de nombre **bitnami/wordpress:6.4.3**.
+2. Defino las variables de **wordpress**, la primera como en principio no está destinada a cambiar la escribo directamente.
+3. Defino las sucesivas variables de la base de datos, etc...
+4. En cuanto a los volumenes será uno gestionado por docker.
+5. Dependerá del servicio de **mysql**.
+6. Definición de red personalizada, en este caso como **frontend-net** y **backend-net**.
+```
+services:
+  wordpress:
+    image: bitnami/wordpress:6.4.3 # <-- bajarlo de bitnami para agregarle mas variables de conf al wordpress. 
+    
+    environment: 
+      - WORDPRESS_DATABASE_HOST=mysql
+      - WORDPRESS_DATABASE_NAME=${WORDPRESS_DATABASE_NAME}
+      - WORDPRESS_DATABASE_USER=${WORDPRESS_DATABASE_USER}
+      - WORDPRESS_DATABASE_PASSWORD=${WORDPRESS_DATABASE_PASSWORD}
+      - WORDPRESS_BLOG_NAME=${WORDPRESS_BLOG_NAME}
+      - WORDPRESS_USERNAME=${WORDPRESS_USERNAME}
+      - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
+      - WORDPRESS_EMAIL=${WORDPRESS_EMAIL}
 
+    volumes: 
+      - wordpress_data:/bitnami/wordpress
+    depends_on:
+      - mysql
+    restart: always
+    networks:
+      - frontend-net
+      - backend-net
+```
