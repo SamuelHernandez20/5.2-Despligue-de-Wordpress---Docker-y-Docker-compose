@@ -114,7 +114,7 @@ services:
 2. Definición de puertos [máquina]:[contenedor_mysql] **80** y **80**; **443** y **443**.
 4. Dentro de la definción de las variables de entorno primeramente defino mi **nombre de dominio** redirigido a **http://wordpress:8080**.
 5. Reinicio del contenedor, incluso si se detiene por cualquier motivo de error, para garantizar su disponibilidad.
-8. Definición de red pers``````onalizada, en este caso como **frontend-net**.
+8. Definición de red personalizada, en este caso como **frontend-net**.
 
 - **local**: Crea un certificado autofirmado para hacer pruebas en local.
 - **staging**: Solicita un certificado de prueba a Let’s Encrypt para nuestro entorno de pruebas.
