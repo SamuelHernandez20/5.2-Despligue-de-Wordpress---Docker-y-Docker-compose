@@ -116,9 +116,9 @@ services:
 5. Reinicio del contenedor, incluso si se detiene por cualquier motivo de error, para garantizar su disponibilidad.
 8. Definición de red personalizada, en este caso como **frontend-net**.
 
-- **local**: Crea un certificado autofirmado para hacer pruebas en local.
-- **staging**: Solicita un certificado de prueba a Let’s Encrypt para nuestro entorno de pruebas.
-- **production**: Solicita un certificado válido a Let’s Encrypt. Esta opción sólo la usaremos para poner nuestro sitio web en producción.
+- **local**: Crea un certificado **autofirmado** para hacer pruebas en **local**.
+- **staging**: Solicita un certificado de prueba a **Let’s Encrypt** para nuestro entorno de pruebas.
+- **production**: Solicita un certificado válido a **Let’s Encrypt**. Esta opción sólo la usaremos para poner nuestro sitio web en producción.
 
  ```
   https-portal:
@@ -134,7 +134,7 @@ services:
     networks:
       - frontend-net
  ```
-En esta parte de aquí se definen los volumenes de datos:
+En esta parte de aquí se definen los **volumenes de datos**:
 
 ```
 volumes: 
