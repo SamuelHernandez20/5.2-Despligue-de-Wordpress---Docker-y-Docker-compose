@@ -94,6 +94,7 @@ services:
 3. La parte de las variables defino el **PMA_HOST**, que era indicar el nombre del contenedor con el que quiero conectarme desde phpmyadmin, sin tener que indicarlo manualmente desde la interfaz gráfica.
 4. Reinicio.
 5. Definición de red personalizada, en este caso como **frontend-net** y **backend-net**.
+   
  ```
  phpmyadmin:
     image: phpmyadmin:5.2
@@ -106,7 +107,6 @@ services:
       - frontend-net
       - backend-net
  ```
-
 
 `En este cuarto bloque el servicio que defino es el del https-portal:`
 
@@ -146,5 +146,6 @@ Y aqui las redes definidas:
 ```
 networks:
  frontend-net:
+```
  backend-net:
 ```
