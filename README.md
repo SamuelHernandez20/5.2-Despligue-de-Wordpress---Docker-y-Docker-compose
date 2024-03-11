@@ -64,3 +64,25 @@ services:
       - frontend-net
       - backend-net
 ```
+
+`En este segundo bloque el servicio que defino es el del mysql:`
+1. Procedo a descargar la imagen de **mysql**, en este caso una imagen de nombre **mysql:8.0**.
+2. Defino las variables básicas de la **base de datos**.
+3. En este caso defino un **volumen** gestionado por **docker**.
+4. Reinicio.
+5. Definición de red personalizada, en este caso como **backend-net**.
+
+ ```
+ mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${WORDPRESS_DATABASE_NAME}
+      - MYSQL_USER=${WORDPRESS_DATABASE_USER}
+      - MYSQL_PASSWORD=${WORDPRESS_DATABASE_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    networks:
+      - backend-net
+```
