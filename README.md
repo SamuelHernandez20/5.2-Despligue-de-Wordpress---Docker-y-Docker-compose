@@ -123,7 +123,7 @@ services:
 - **production**: Solicita un certificado válido a Let’s Encrypt. Esta opción sólo la usaremos para poner nuestro sitio web en producción.
 
  ```
- https-portal:
+  https-portal:
     image: steveltn/https-portal:1 # <-- al ser no verificada se le coloca el namespace.
     ports:
       - 80:80
