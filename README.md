@@ -66,6 +66,7 @@ services:
 ```
 
 `En este segundo bloque el servicio que defino es el del mysql:`
+
 1. Procedo a descargar la imagen de **mysql**, en este caso una imagen de nombre **mysql:8.0**.
 2. Defino las variables básicas de la **base de datos**.
 3. En este caso defino un **volumen** gestionado por **docker**.
@@ -86,3 +87,17 @@ services:
     networks:
       - backend-net
 ```
+`En este tercer bloque el servicio que defino es el del mysql:`
+
+ ```
+ phpmyadmin:
+    image: phpmyadmin:5.2
+    ports:
+      - 8080:80
+    environment: 
+      - PMA_HOST=mysql
+    restart: always
+    networks:
+      - frontend-net
+      - backend-net
+ ```
