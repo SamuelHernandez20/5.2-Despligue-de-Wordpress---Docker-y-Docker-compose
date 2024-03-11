@@ -29,4 +29,7 @@ DOMINIO=wordpressamuel.ddns.net
 
 En la primera línea nos encontramos con el establecimiento de la **versión**, útil por si hay **incompatibilidades** con los servicios:
 
+```
+version: '3'
+```
 
