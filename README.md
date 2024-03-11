@@ -146,6 +146,6 @@ Y aqui las redes definidas:
 ```
 networks:
  frontend-net:
-```
  backend-net:
 ```
+
